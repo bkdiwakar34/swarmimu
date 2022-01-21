@@ -11,6 +11,7 @@ from datetime import datetime
 from threading import Thread
 from PyQt5.QtCore import QObject, pyqtSignal
 
+
 class SerialPort(object):
     # Contains functions that enable communication between the docking station and the IMU watches
     data = pyqtSignal(list)
@@ -81,31 +82,7 @@ class SerialPort(object):
             return _chksum == chksum
         return False
     
-    # def recordData(self,header,filename=' '):
-    #     #keyboard.wait('enter')
-       
-    #     with open(filename, 'w', encoding='UTF8', newline='') as f:
-    #         writer = csv.writer(f)
-    #         writer.writerow(header)
-    #         current_date_time = datetime.now()
-    #         while True:
-    #             try: 
-    #                 # if myapp.Mainwindow.stop_record.is_killed == True:  
-    #                 if not self.sw:
-    #                     print('Recording stopped!')
-    #                     break  
-    #             except:
-    #                 break  
-    #             #if self.serial_read():
-    #             print(len(self.payload))
-    #             y1=list(struct.unpack('12f',self.payload))
-                
-                
-    #             y1.insert(0, current_date_time)
-    #             #print(len(y1))   
-    #             writer.writerow(y1)
-
-    def show_data(self):
+    def show_data(self, progress_callback):
         
         self.Ax=[]
         self.Ay=[]
@@ -166,7 +143,7 @@ class SerialPort(object):
                     self.Gx1 = self.Gx1[-1000:]
                     self.Gy1 = self.Gy1[-1000:]
                     self.Gz1 = self.Gz1[-1000:]
-                
+                progress_callback.emit([self.Ax, self.Ay,self.Az,self.Gx,self.Gy,self.Gz, self.Ax1, self.Ay1, self.Az1, self.Gx1, self.Gy1, self.Gz1])
                 
     
             
@@ -184,47 +161,17 @@ class SerialPort(object):
         if not sw:
             self.sw = 0
             
-    def connect1(self):
-        if self.ser.isOpen():
-            self.show=Thread(target=self.show_data,args=())
-            self.show.start()  
-    def ConnectToArduino(self,header,filename=' '):
-        if self.ser.isOpen():
+    # def connect1(self):
+    #     if self.ser.isOpen():
+    #         self.show=Thread(target=self.show_data,args=())
+    #         self.show.start()  
+    # def ConnectToArduino(self,header,filename=' '):
+    #     if self.ser.isOpen():
         
-            #Start reader and writer threads.
+    #         #Start reader and writer threads.
 
-            reader = Thread(target=self.recordData, args=(header,filename))
-            print('hi')
-            reader.start()
-
-# B=SerialPort.show_data()   
-# print(B)        
-#Ui_MainWindow.Pushbutton1.clicked.connect(self.start_record)
-#Ui_MainWindow.pushbutton2.clicked.connect(self.stop_record)
-# temp=SerialPort('COM6',9600)
-# header=['time','gyrox','gyroy','gyroz','accelx','accely','accelz']
-# temp.ConnectToArduino(header,r'C:\Users\Dell\Desktop\MS Bioengineering\imu_data5.csv')
-
-# header=['time','gyrox','gyroy','gyroz','accelx','accely','accelz']
-# keyboard.wait('enter') 
-# with open(r'C:\Users\Dell\Desktop\MS Bioengineering\imu_data3.csv', 'w', encoding='UTF8', newline='') as f:
-#     writer = csv.writer(f)
-#     writer.writerow(header)
-#     current_date_time = datetime.now()
-#     while True:
-#         try:  
-#             if keyboard.is_pressed('esc'):   
-#                 print('Recording stopped!')
-#                 break  
-#         except:
-#             break  
-#         if temp.serial_read():
-#             y=list(struct.unpack('6f',temp.payload))
-#             y.insert(0, current_date_time)
-#             writer.writerow(y)
-
-
-
-
+    #         reader = Thread(target=self.recordData, args=(header,filename))
+    #         print('hi')
+    #         reader.start()
 
 
