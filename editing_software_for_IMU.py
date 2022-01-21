@@ -73,6 +73,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.counter2=0
         self.n=0
         initialize_graphs(self)
+        progress_callback = pyqtSignal(list)
         
         self.a.connect1()
 
@@ -85,7 +86,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
 
         """tryng q therad"""
 
-        _show_data = Worker(self.a.show_dat, args=())
+        _show_data = Worker(self.a.show_dat, args=(progress_callback))
         _show_data.progress.connect(self.connectnow)
         _show_data.error.connect(self.problem_fun)
         self.threadpool.start(_show_data)
