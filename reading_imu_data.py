@@ -15,6 +15,7 @@ from PyQt5.QtCore import QObject, pyqtSignal
 class SerialPort(object):
     # Contains functions that enable communication between the docking station and the IMU watches
     data = pyqtSignal(list)
+    progress_callback = pyqtSignal(list)
 
     def __init__(self, serialport, serialrate=115200):
         # Initialise serial payload
@@ -143,7 +144,8 @@ class SerialPort(object):
                     self.Gx1 = self.Gx1[-1000:]
                     self.Gy1 = self.Gy1[-1000:]
                     self.Gz1 = self.Gz1[-1000:]
-                progress_callback.emit([self.Ax, self.Ay,self.Az,self.Gx,self.Gy,self.Gz, self.Ax1, self.Ay1, self.Az1, self.Gx1, self.Gy1, self.Gz1])
+                    # print(len(self.Ax))
+                    progress_callback.emit([self.Ax, self.Ay,self.Az,self.Gx,self.Gy,self.Gz, self.Ax1, self.Ay1, self.Az1, self.Gx1, self.Gy1, self.Gz1])
                 
     
             
