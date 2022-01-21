@@ -145,7 +145,7 @@ class SerialPort(object):
                     self.Gy1 = self.Gy1[-1000:]
                     self.Gz1 = self.Gz1[-1000:]
                     # print(len(self.Ax))
-                    progress_callback.emit([self.Ax, self.Ay,self.Az,self.Gx,self.Gy,self.Gz, self.Ax1, self.Ay1, self.Az1, self.Gx1, self.Gy1, self.Gz1])
+                progress_callback.emit([self.Ax, self.Ay,self.Az,self.Gx,self.Gy,self.Gz, self.Ax1, self.Ay1, self.Az1, self.Gx1, self.Gy1, self.Gz1])
                 
     
             

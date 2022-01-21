@@ -73,7 +73,6 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         self.counter2=0
         self.n=0
                
-        
         initialize_graphs(self)
         progress_callback = pyqtSignal(list)
         
@@ -196,21 +195,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         #self.a.ConnectToArduino(header,r'C:\Users\Dell\Desktop\MS Bioengineering\imu_data7.csv')
         
         print("Recording started")
-        
-    # def show_new_window(self):
-    #     time.sleep(1)
-        
-    #     # self.timer= QTimer()  
-    #     # self.timer.setInterval(1)
-    #     # self.timer.timeout.connect(self.connectnow)
-    #     # self.timer.start() 
-    #     while True:
-    #         time.sleep(0.1)
-    #         # self.connectnow()
-    #         self._update_canvas(self.a.Ax,self.a.Ay,self.a.Az,self.a.Gx,self.a.Gy,self.a.Gz,self._line1,self._line2,self._line3,self._line4,self._line5,self._line6)
-    #         self._update_canvas(self.a.Ax1,self.a.Ay1,self.a.Az1,self.a.Gx1,self.a.Gy1,self.a.Gz1,self._line11,self._line12,self._line13,self._line14,self._line15,self._line16)
-
-        
+         
     @pyqtSlot(list)
     def connectnow(self, data):
         
